@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Dia dos Namorados ❤️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    background:#000;
+    color:#fff;
+    font-family:'Segoe UI',sans-serif;
+    overflow-x:hidden;
+}
+#hearts{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+}
+.heart{
+    position:absolute;
+    color:#ff4da6;
+    animation:fall linear forwards;
+}
+@keyframes fall{
+    from{transform:translateY(-10vh);opacity:1}
+    to{transform:translateY(110vh);opacity:0}
+}
+.hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+    position:relative;
+    z-index:2;
+}
+.hero h1{
+    color:#ff69b4;
+    font-size:3rem;
+    margin-bottom:20px;
+}
+.btn{
+    background:#ff4da6;
+    border:none;
+    color:white;
+    padding:15px 30px;
+    border-radius:30px;
+    font-size:1.1rem;
+    cursor:pointer;
+    transition:.3s;
+}
+.btn:hover{transform:scale(1.08)}
+#content{
+    display:none;
+    position:relative;
+    z-index:2;
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+.intro{
+    text-align:center;
+    font-size:1.5rem;
+    margin:40px 0;
+    color:#ffb6d9;
+}
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    margin:40px 0;
+}
+.polaroid{
+    background:white;
+    padding:10px 10px 30px;
+    border-radius:8px;
+    box-shadow:0 0 25px rgba(255,105,180,.5);
+    transform:rotate(calc(var(--r) * 1deg));
+    animation:float 4s ease-in-out infinite;
+    cursor:pointer;
+}
+.polaroid img{
+    width:100%;
+    display:block;
+    border-radius:4px;
+}
+@keyframes float{
+    0%,100%{transform:translateY(0) rotate(calc(var(--r) * 1deg));}
+    50%{transform:translateY(-8px) rotate(calc(var(--r) * 1deg));}
+}
+.letter{
+    max-width:900px;
+    margin:50px auto;
+    background:rgba(255,255,255,.06);
+    padding:25px;
+    border-radius:20px;
+    line-height:1.9;
+    font-size:1.1rem;
+    white-space:pre-wrap;
+}
+.final{
+    text-align:center;
+    margin:60px 0;
+}
+#surprise{
+    display:none;
+    text-align:center;
+    padding:50px 20px;
+}
+#surprise img{
+    width:100%;
+    max-width:450px;
+    border-radius:20px;
+    box-shadow:0 0 40px #ff69b4;
+    margin-bottom:20px;
+}
+.big-love{
+    font-size:3rem;
+    color:#ff69b4;
+    animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+    50%{transform:scale(1.05)}
+}
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.95);
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+.modal img{
+    max-width:90%;
+    max-height:90%;
+}
+</style>
+</head>
+<body>
+
+<div id="hearts"></div>
+
+<section class="hero" id="hero">
+    <h1>❤️ Feliz Dia dos Namorados ❤️</h1>
+    <p style="margin-bottom:25px">Uma surpresa te espera...</p>
+    <button class="btn" onclick="startSurprise()">Abrir Surpresa ❤️</button>
+</section>
+
+<div id="content">
+    <div class="intro">Para a garota que mudou minha vida ❤️</div>
+
+    <div class="gallery">
+        <div class="polaroid" style="--r:-4"><img src="foto1.png"></div>
+        <div class="polaroid" style="--r:3"><img src="foto2.jpg"></div>
+        <div class="polaroid" style="--r:-2"><img src="foto3.jpg"></div>
+        <div class="polaroid" style="--r:5"><img src="foto4.jpg"></div>
+        <div class="polaroid" style="--r:-5"><img src="foto5.gif"></div>
+        <div class="polaroid" style="--r:2"><img src="foto6.png"></div>
+        <div class="polaroid" style="--r:-3"><img src="foto7.png"></div>
+        <div class="polaroid" style="--r:4"><img src="foto8.png"></div>
+    </div>
+
+    <div class="letter" id="letter"></div>
+
+    <div class="final">
+        <button class="btn" onclick="showFinal()">Clique aqui ❤️</button>
+    </div>
+
+    <div id="surprise">
+        <img src="foto8.png" alt="Foto especial">
+        <div class="big-love">Eu te amo infinitamente ❤️</div>
+    </div>
+</div>
+
+<audio id="music" loop>
+    <source src="deusa.mp3" type="audio/mpeg">
+</audio>
+
+<div class="modal" id="modal">
+    <img id="modalImg">
+</div>
+
+<script>
+const texto = `Oii meu amorrr, feliz Dia dos Namoradosssss!!!!! ❤️
+
+Demorei para fazer minha surpresinha, né? Mais um ano sem dinheiro para te dar um presente fofo kkkkkkkkkkkk. Desculpa, mas vou recompensar você.
+
+Por onde eu começo?
+
+Mais um Dia dos Namorados juntos, né meu amor? Quero dizer que sou muito grato por ter você na minha vida. Você é uma pessoa incrível, uma namorada incrível, uma companheira incrível. Ao seu lado eu só consigo pensar em ser uma pessoa melhor, em como ser melhor para você.
+
+E é sempre engraçado relembrar como nos conhecemos, né amor? Kkkkkkkkkkkk. Vai ser uma história muito engraçada para contar e relembrar quando estivermos juntinhos.
+
+Sua companhia é tudo para mim. Os momentos com você são sempre leves e engraçados. Eu não consigo pensar em nada além de ouvir o seu sorriso tão bobo e tão lindo. Eu amo ver você sorrindo.
+
+Quero continuar tendo esses momentos com você, momentos em que me sinto nas nuvens. Você sempre será minha companhia favorita, meu amor, minha amiga e minha parceira.
+
+Quero que eu e você continuemos evoluindo como casal. Quero ver esse sorriso que eu amo tanto pessoalmente. Quero sentir você pessoalmente. Esse é o meu sonho e a minha meta.
+
+Obrigado por tudo, meu amor. Eu amo você com todas as minhas forças. Você é uma namorada incrível, uma mulher incrível e uma amiga incrível. ❤️
+
+Eu te amo. ❤️`;
+
+function startSurprise(){
+    document.getElementById('hero').style.display='none';
+    document.getElementById('content').style.display='block';
+    document.getElementById('music').play();
+    typeText();
+}
+
+function typeText(){
+    let i=0;
+    const el=document.getElementById('letter');
+    const timer=setInterval(()=>{
+        el.textContent += texto.charAt(i);
+        i++;
+        if(i>=texto.length) clearInterval(timer);
+    },25);
+}
+
+function showFinal(){
+    document.getElementById('surprise').style.display='block';
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+    for(let i=0;i<40;i++) createHeart();
+}
+
+function createHeart(){
+    const h=document.createElement('div');
+    h.className='heart';
+    h.innerHTML='❤️';
+    h.style.left=Math.random()*100+'vw';
+    h.style.fontSize=(15+Math.random()*25)+'px';
+    h.style.animationDuration=(4+Math.random()*4)+'s';
+    document.getElementById('hearts').appendChild(h);
+    setTimeout(()=>h.remove(),8000);
+}
+
+setInterval(()=>createHeart(),500);
+
+document.querySelectorAll('.polaroid img').forEach(img=>{
+    img.onclick=()=>{
+        document.getElementById('modal').style.display='flex';
+        document.getElementById('modalImg').src=img.src;
+    }
+});
+
+document.getElementById('modal').onclick=()=>{
+    document.getElementById('modal').style.display='none';
+};
+</script>
+</body>
+</html>
